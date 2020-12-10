@@ -85,4 +85,27 @@ public class SalesController {
         return "main";
     }
 
+    @PostMapping("whereIdJDBC")
+    public String whereIdJDBC(Map<String, Object> model){
+        SimpleDriverDataSource dataSource = new SimpleDriverDataSource();
+        dataSource.setDriverClass(com.mysql.jdbc.Driver.class);
+        dataSource.setUrl("jdbc:mysql://localhost/sales_db?useUnicode=true&serverTimezone=UTC"); //jdbc:mysql://localhost:3306/sales_db?useSSL=false&useUnicode=true&characterEncoding=UTF-8
+        dataSource.setUsername("root");
+        dataSource.setPassword("qwe234");
+
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+
+        SalesProductJdbcRepository repository = new SalesProductJdbcRepository(jdbcTemplate);
+        System.out.println(repository.count());
+
+        for (SalesPeriodJdbcDemo sales:repository.selectWhereId(1)){
+            System.out.println(sales);
+        }
+
+        //model.put("count", iterable.size());
+        //System.out.println(iterable.size());
+
+        return "main";
+    }
+
 }

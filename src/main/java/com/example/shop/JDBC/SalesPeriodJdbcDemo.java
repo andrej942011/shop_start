@@ -27,6 +27,14 @@ public class SalesPeriodJdbcDemo {
         this.product = product;
     }
 
+    public SalesPeriodJdbcDemo(long id, long price, Date dateFrom, Date dateTo, int product) {
+        this.id = id;
+        this.price = price;
+        this.dateFrom = dateFrom;
+        this.dateTo = dateTo;
+        this.product=product;
+    }
+
     public Long getId() {
         return id;
     }
@@ -70,8 +78,8 @@ public class SalesPeriodJdbcDemo {
     @Override
     public String toString(){
         return String.format(
-               "Sales[ id=%d, price=%s, product=%s ]",
-               id, price, product//, dateFrom
+               "Sales[ id=%d, price=%s, product=%s, dateFrom=%s, dateTo=%s ]",
+               id, price, product, dateFrom, dateTo//, dateFrom
         );
     }
 }
